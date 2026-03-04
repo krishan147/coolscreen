@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    privileged: true        # needed for I2C/hardware access
+    devices:
+      - /dev/i2c-1:/dev/i2c-1   # gives container access to I2C bus
+    restart: unless-stopped
