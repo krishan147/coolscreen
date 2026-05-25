@@ -2,18 +2,16 @@ try:
     import smbus
 except ImportError:
     from mock import smbus
-
 import time
 import socket
+import subprocess
 from datetime import datetime
 
 LCD_ADDR = 0x3e
 RGB_ADDR = 0x60
-
 bus = smbus.SMBus(1)
 
 # ---------- LCD LOW LEVEL ----------
-
 def lcd_cmd(cmd):
     bus.write_byte_data(LCD_ADDR, 0x80, cmd)
     time.sleep(0.002)
@@ -43,13 +41,11 @@ def lcd_set_cursor(line, pos=0):
     lcd_cmd(addr)
 
 def lcd_print(text):
-    # Ensure the text is exactly 16 characters
     text = text.ljust(16)[:16]
     for char in text:
         lcd_data(ord(char))
 
 # ---------- RGB ----------
-
 def lcd_set_rgb(r, g, b):
     bus.write_byte_data(RGB_ADDR, 0x00, 0x00)
     bus.write_byte_data(RGB_ADDR, 0x01, 0x00)
@@ -59,19 +55,14 @@ def lcd_set_rgb(r, g, b):
     bus.write_byte_data(RGB_ADDR, 0x02, b)
 
 # ---------- SYSTEM INFO ----------
-
 def get_ip():
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        ip = s.getsockname()[0]
-        s.close()
-        return ip
+        result = subprocess.check_output(["hostname", "-I"], timeout=3)
+        return result.decode().split()[0]
     except:
         return "No Network"
 
 # ---------- MAIN ----------
-
 def main():
     lcd_init()
     lcd_set_rgb(0, 32, 0)  # green
