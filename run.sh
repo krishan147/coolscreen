@@ -1,3 +1,5 @@
+#!/bin/bash
 cd /home/semiflex/Desktop/projects/coolscreen
-git pull origin main
+git fetch origin master
+git reset --hard origin/master
 python3 main.py
