@@ -5,6 +5,7 @@ except ImportError:
 import time
 import socket
 import subprocess
+import random
 from datetime import datetime
 
 LCD_ADDR = 0x3e
@@ -63,6 +64,8 @@ def get_ip():
         return "No Network"
 
 # ---------- MAIN ----------
+FACES = [":)", ":(", ";)", ":D", ":|", ":o", ":p", ";D", "^^", ":3"]
+
 def main():
     lcd_init()
     lcd_set_rgb(0, 32, 0)  # green
@@ -72,8 +75,9 @@ def main():
     lcd_print(now)
 
     ip = get_ip()
+    face = random.choice(FACES)
     lcd_set_cursor(1)
-    lcd_print(ip)
+    lcd_print(ip + " " + face)
 
 if __name__ == "__main__":
     main()
