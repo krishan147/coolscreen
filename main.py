@@ -70,7 +70,7 @@ def main():
     lcd_init()
     lcd_set_rgb(0, 32, 0)  # green
     now = datetime.now()
-    formatted = now.strftime("%Y%m%d %H:%M")
+    formatted = now.strftime("%H:%M")
     if now.strftime("%H:%M") == "00:00":
         formatted = formatted + " " * (16 - len(formatted))
     lcd_set_cursor(0)
