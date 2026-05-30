@@ -69,11 +69,12 @@ FACES = [":)", ":(", ";)", ":D", ":|", ":o", ":p", ";D", "^^", ":3"]
 def main():
     lcd_init()
     lcd_set_rgb(0, 32, 0)  # green
-
-    now = datetime.now().strftime("%Y-%m-%d %H:%M")
+    now = datetime.now()
+    formatted = now.strftime("%Y%m%d %H:%M")
+    if now.strftime("%H:%M") == "00:00":
+        formatted = formatted + " " * (16 - len(formatted))
     lcd_set_cursor(0)
-    lcd_print(now)
-
+    lcd_print(formatted)
     ip = get_ip()
     face = random.choice(FACES)
     lcd_set_cursor(1)
