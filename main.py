@@ -67,8 +67,7 @@ def get_ip():
 FACES = [":)", ":(", ";)", ":D", ":|", ":o", ":p", ";D", "^^", ":3"]
 
 def main():
-    lcd_init()
-    lcd_set_rgb(0, 32, 0)  # green
+    lcd_set_rgb(0, 32, 0)
     now = datetime.now()
     formatted = now.strftime("%H:%M").ljust(10)
     lcd_set_cursor(0)
