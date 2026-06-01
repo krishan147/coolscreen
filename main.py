@@ -31,7 +31,7 @@ def lcd_init():
     time.sleep(0.2)
     lcd_cmd(0x38)
     lcd_cmd(0x0C)
-    lcd_cmd(0x01)
+    # lcd_cmd(0x01)
 
 def lcd_clear():
     lcd_cmd(0x01)
