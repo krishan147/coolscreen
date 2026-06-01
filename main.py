@@ -41,8 +41,8 @@ def lcd_set_cursor(line, pos=0):
     addr = 0x80 + (0x40 * line) + pos
     lcd_cmd(addr)
 
-def lcd_print(text):
-    text = text.ljust(16)[:16]
+def lcd_print(text, width=16):
+    text = text.ljust(width)[:width]
     for char in text:
         lcd_data(ord(char))
 
@@ -71,11 +71,11 @@ def main():
     now = datetime.now()
     formatted = now.strftime("%H:%M").ljust(10)
     lcd_set_cursor(0)
-    lcd_print(formatted)
+    lcd_print(formatted, width=10)  # time: only write cols 0-9
     ip = get_ip()
     face = random.choice(FACES)
     lcd_set_cursor(1)
-    lcd_print(ip + " " + face)
+    lcd_print(ip + " " + face)      # line 1: full 16 cols is fine
 
 if __name__ == "__main__":
     main()
