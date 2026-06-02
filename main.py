@@ -31,7 +31,6 @@ def lcd_init():
     time.sleep(0.2)
     lcd_cmd(0x38)
     lcd_cmd(0x0C)
-    # lcd_cmd(0x01)
 
 def lcd_clear():
     lcd_cmd(0x01)
@@ -67,12 +66,17 @@ def get_ip():
 FACES = [":)", ":(", ";)", ":D", ":|", ":o", ":p", ";D", "^^", ":3"]
 
 def main():
-    lcd_clear()
     lcd_set_rgb(0, 32, 0)
+
+    # Clear bottom line only (line 1)
+    lcd_set_cursor(1)
+    lcd_print(" " * 16)
+
     ip = get_ip()
     face = random.choice(FACES)
+
     lcd_set_cursor(1)
-    lcd_print(ip + " " + face)      # line 1: full 16 cols is fine
+    lcd_print(ip + " " + face)
 
 if __name__ == "__main__":
     main()
