@@ -68,10 +68,6 @@ FACES = [":)", ":(", ";)", ":D", ":|", ":o", ":p", ";D", "^^", ":3"]
 
 def main():
     lcd_set_rgb(0, 32, 0)
-    now = datetime.now()
-    formatted = now.strftime("%H:%M").ljust(10)
-    lcd_set_cursor(0)
-    lcd_print(formatted, width=10)  # time: only write cols 0-9
     ip = get_ip()
     face = random.choice(FACES)
     lcd_set_cursor(1)
