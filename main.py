@@ -67,6 +67,7 @@ def get_ip():
 FACES = [":)", ":(", ";)", ":D", ":|", ":o", ":p", ";D", "^^", ":3"]
 
 def main():
+    lcd_clear()
     lcd_set_rgb(0, 32, 0)
     ip = get_ip()
     face = random.choice(FACES)
